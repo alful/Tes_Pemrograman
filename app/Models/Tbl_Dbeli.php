@@ -9,7 +9,11 @@ class Tbl_Dbeli extends Model
 {
     use HasFactory;
 
+    public $table = "TBL_DBELI";
     protected $guarded = ['id'];
+    protected $primaryKey = 'id';
+
+
     protected $with = ['user', 'tbl_barang', 'tbl_hbeli'];
     public function user()
     {
@@ -28,6 +32,6 @@ class Tbl_Dbeli extends Model
 
     public function tbl_stock()
     {
-        return $this->belongsTo(Tbl_stock::class);
+        return $this->hasMany(Tbl_stock::class);
     }
 }

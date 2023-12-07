@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Tbl_Suplier extends Model
 {
     use HasFactory;
+    public $table = "TBL_SUPLIER";
+    protected $primaryKey = 'id';
 
     protected $guarded = ['id'];
     public function tbl_hbeli()

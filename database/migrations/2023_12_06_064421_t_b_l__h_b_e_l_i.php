@@ -16,7 +16,7 @@ return new class extends Migration
             $table->char('NOTRANSAKSI', 10)->unique();
             $table->char('KODESPL', 10);
             $table->foreign('KODESPL')->references('KODESPL')->on('TBL_SUPLIER');
-            $table->date('TGLBELI')->unique();
+            $table->date('TGLBELI');
             $table->timestamps();
         });
     }

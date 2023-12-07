@@ -15,14 +15,20 @@ return new class extends Migration
             $table->id();
 
             $table->char('NOTRANSAKSI', 10);
-            $table->foreign('NOTRANSAKSI')->references('NOTRANSAKSI')->on('TBL_HBELI');
+            $table->foreign('NOTRANSAKSI')->references('NOTRANSAKSI')->on('TBL_HBELI')->onDelete('cascade');;
 
             $table->char('KODESPL', 10);
             $table->foreign('KODESPL')->references('KODESPL')->on('TBL_SUPLIER');
 
             $table->date('TGLBELI');
-            $table->foreign('TGLBELI')->references('TGLBELI')->on('TBL_HBELI');
-            $table->integer('TOTALHUTANG');
+            // $table->foreign('TGLBELI')->references('TGLBELI')->on('TBL_HBELI');
+            // $table->foreign('TGLBELI')->constrained(
+            //     table: 'TBL_DBELI',
+            //     indexName: 'TGLBELI'
+            // );
+            // $table->integer('TOTALHUTANG');
+            $table->foreignId('TOTALHUTANG');
+            // $table->foreign('TOTALHUTANG')->references('TOTALRP')->on('TBL_DBELI');
 
             $table->timestamps();
         });

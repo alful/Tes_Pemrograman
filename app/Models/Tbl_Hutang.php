@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Tbl_Hutang extends Model
 {
     use HasFactory;
-    protected $guarded = ['id'];
+    public $table = "TBL_HUTANG";
+
+    protected $fillable = ['NOTRANSAKSI', 'KODESPL', 'TGLBELI', 'TOTALHUTANG'];
 
     protected $with = ['tbl_hbeli', 'tbl_suplier'];
 

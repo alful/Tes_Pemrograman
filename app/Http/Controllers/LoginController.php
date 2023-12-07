@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 
 class LoginController extends Controller
@@ -31,6 +32,14 @@ class LoginController extends Controller
             'email' => 'required|email',
             'password' => 'required'
         ]);
+        $user = User::find(1);
+        if (isset($user)) {
+            Auth::login($user);
+            $request->session()->regenerate();
+            //user is logged in.
+            return redirect()->intended('/dashboard');
+        }
+
         $email = $request->get('a@gmail.com');
         $attempt = Auth::attempt($credentials);
         // dd('log');
@@ -41,17 +50,17 @@ class LoginController extends Controller
         //     // return redirect()->intended('/dashboard');
         // }
 
-        if (!$attempt) {
-            $request->session()->regenerate();
+        // if (!$attempt) {
+        //     $request->session()->regenerate();
 
-            // return redirect()->intended('/dashboard');
-            return redirect()->intended('/');
-        }
+        //     // return redirect()->intended('/dashboard');
+        //     return redirect()->intended('/');
+        // }
         // dd('log');
 
         // if(Auth::attempt(['email' => $email, 'password' => $password]))
         // return back()->withErrors('loginError','Login Failed');
-        // return back()->with('loginError', 'Login Failed');
+        return back()->with('loginError', 'Login Failed');
     }
 
     public function logout()

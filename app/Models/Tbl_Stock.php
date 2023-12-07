@@ -8,12 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Tbl_Stock extends Model
 {
     use HasFactory;
+    public $table = "TBL_STOCK";
+    protected $primaryKey = 'KODEBRG';
 
-    protected $with = ['tbl_hbeli'];
-
-    public function tbl_hbeli()
+    protected $with = ['tbl_dbeli'];
+    protected $fillable = [
+        'KODEBRG',
+        'QTYBELI',
+    ];
+    public function tbl_dbeli()
     {
-        return $this->belongsTo(Tbl_Hbeli::class);
+        return $this->belongsTo(Tbl_Dbeli::class);
     }
 
     // public function tbl_dbeli()

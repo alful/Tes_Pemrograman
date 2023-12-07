@@ -16,7 +16,7 @@ return new class extends Migration
             $table->char('KODEBRG', 10)->unique();
             $table->char('NAMABRG', 100);
             $table->char('SATUAN', 10);
-            $table->integer('HARGABELI')->unique();
+            $table->integer('HARGABELI');
             $table->timestamps();
         });
     }

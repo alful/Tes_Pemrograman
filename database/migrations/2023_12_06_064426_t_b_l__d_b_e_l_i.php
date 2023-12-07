@@ -14,20 +14,26 @@ return new class extends Migration
         Schema::create('TBL_DBELI', function (Blueprint $table) {
             $table->id();
             $table->char('NOTRANSAKSI', 10);
-            $table->foreign('NOTRANSAKSI')->references('NOTRANSAKSI')->on('TBL_HBELI');
+            $table->foreign('NOTRANSAKSI')->references('NOTRANSAKSI')->on('TBL_HBELI')->onDelete('cascade');;
 
-            $table->char('KODEBRG', 10)->unique();
+            // $table->char('KODEBRG', 10);
+            // $table->foreignId('KODEBRG');
+            $table->char('KODEBRG', 10);
             $table->foreign('KODEBRG')->references('KODEBRG')->on('TBL_BARANG');
 
-            $table->integer('HARGABELI');
-            $table->foreign('HARGABELI')->references('HARGABELI')->on('TBL_BARANG');
-            $table->integer('QTY')->unique();
+            // $table->unsignedBigInteger('HARGABELI');
+            $table->foreignId('HARGABELI');
+            $table->integer('QTY');
             $table->integer('DISKON');
-            $table->integer('DISKONRP');
+            $table->float('DISKONRP');
             $table->integer('TOTALRP');
 
             $table->timestamps();
         });
+        // Schema::table('TBL_DBELI', function ($table) {
+        //     $table->foreign('HARGABELI')
+        //         ->references('HARGABELI')->on('TBL_BARANG');
+        // });
     }
 
     /**

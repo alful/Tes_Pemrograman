@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PembelianController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TblBarangController;
 use App\Http\Controllers\TblDbeliController;
@@ -23,22 +24,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('login.index');
 });
 
-Route::resource('/suplier', TblSuplierController::class)->middleware('auth');
-
-// Route::resource('/register', TblSuplierController::class)->middleware('auth');
-
-Route::resource('/stock', TblStockController::class)->middleware('auth');
-
-Route::resource('/hbeli', TblHbeliController::class)->middleware('auth');
-
-Route::resource('/dbeli', TblDbeliController::class)->middleware('auth');
-
-Route::resource('/hutang', TblHutangController::class)->middleware('auth');
-
-Route::resource('/barang', TblBarangController::class)->middleware('auth');
 
 
 
@@ -48,6 +36,26 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
 
 
-Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
-//nyimpan data
-Route::post('/register', [RegisterController::class, 'store']);
+// Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
+// //nyimpan data
+// Route::post('/register', [RegisterController::class, 'store']);
+
+Route::get('/dashboard', function () {
+    return view('dashboard.index');
+})->middleware('auth');
+
+Route::resource('/dashboard/suplier', TblSuplierController::class)->middleware('auth');
+
+// Route::resource('/register', TblSuplierController::class)->middleware('auth');
+
+// Route::resource('/dashboard/stock', TblStockController::class)->middleware('auth');
+
+// Route::resource('/dashboard/hbeli', TblHbeliController::class)->middleware('auth');
+
+// Route::resource('/dashboard/dbeli', TblDbeliController::class)->middleware('auth');
+
+// Route::resource('/dashboard/hutang', TblHutangController::class)->middleware('auth');
+
+Route::resource('/dashboard/barang', TblBarangController::class)->middleware('auth');
+
+Route::resource('/dashboard/pembelian', PembelianController::class)->middleware('auth');

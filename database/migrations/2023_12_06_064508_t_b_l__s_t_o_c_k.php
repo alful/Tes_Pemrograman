@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('TBL_STOCK', function (Blueprint $table) {
             $table->char('KODEBRG', 10);
-            $table->foreign('KODEBRG')->references('KODEBRG')->on('TBL_DBELI');
+            $table->foreign('KODEBRG')->references('KODEBRG')->on('TBL_BARANG')->onDelete('cascade');;
             $table->integer('QTYBELI');
-            $table->foreign('QTYBELI')->references('QTY')->on('TBL_DBELI');
-
+            // $table->foreignId('QTYBELI')->constrained(
+            //     table: 'TBL_DBELI',
+            //     indexName: 'QTYBELI'
+            // );
             $table->timestamps();
         });
     }
